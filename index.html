@@ -16,7 +16,17 @@
         margin: 0;
         padding: 0;
       }
+      h1{
+        font-family: 'Ropa Sans', sans-serif;
+        font-family: 'Handlee', cursive;
+      }
+      
+      #main {
+        text-align: center;
+        color: #7AB643;
+      }
     </style>
+  <link href="https://fonts.googleapis.com/css?family=Handlee|Ropa+Sans" rel="stylesheet">
   </head>
   <body>
     <div id="map"></div>
@@ -26,7 +36,7 @@
 
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 5,
-          center: {lat: 39.422986, lng: -98.831641}
+          center: {lat: 35.439417, lng: -97.859654}
         });
 
         // Create an array of alphabetical characters used to label the markers.
@@ -54,8 +64,8 @@
         {lat: 35.154725, lng: -77.183384},
         {lat: 30.390648, lng: -92.696080},
         {lat: 30.048891, lng: -95.684361},
-        {lat: 28.399860, lng: -97.310338}
-
+        {lat: 28.399860, lng: -97.310338},
+        {lat: 46.990560, lng: -103.968052}
 
       ]
     </script>
@@ -66,3 +76,5 @@
     </script>
   </body>
 </html>
+
+
