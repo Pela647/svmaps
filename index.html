@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Marker Clustering</title>
@@ -16,21 +17,25 @@
         margin: 0;
         padding: 0;
       }
-      h1{
-        font-family: 'Ropa Sans', sans-serif;
-        font-family: 'Handlee', cursive;
+      h1, p{
+        font-family: 'Josefin Sans', sans-serif;
       }
       
       #main {
         text-align: center;
         color: #7AB643;
       }
+      /*#map {
+        border: 5px solid black;
+        border-radius: 10px;
+      }*/
     </style>
   <link href="https://fonts.googleapis.com/css?family=Handlee|Ropa+Sans" rel="stylesheet">
   </head>
   <body>
     <div id="map"></div>
     <script>
+      // require('default-passive-events');
 
       function initMap() {
 
@@ -38,36 +43,65 @@
           zoom: 5,
           center: {lat: 35.439417, lng: -97.859654}
         });
+        var infoWin = new google.maps.InfoWindow();
 
-        // Create an array of alphabetical characters used to label the markers.
-        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
+        var titles = ['Account_name1','Account_name1','Account_name1','Account_name1', 'Account_name1', 'Account_name1','Account_name1','Account_name1', 'Account_name1', 'Account_name1', 'Account_name1'];
+       
         // Add some markers to the map.
         // Note: The code uses the JavaScript Array.prototype.map() method to
         // create an array of markers based on a given "locations" array.
         // The map() method here has nothing to do with the Google Maps API.
         var markers = locations.map(function(location, i) {
-          return new google.maps.Marker({
+          var marker = new google.maps.Marker({
             position: location,
-            label: labels[i % labels.length]
+            title: titles[i % titles.length]
           });
+
+          //  markers.info = new google.maps.InfoWindow({
+          //  content: '<b>Speed:</b> ' + contents.inst + ' knots'
+          //        });
+
+          google.maps.event.addListener(marker, 'click', function(evt) {
+             infoWin.setContent(location.info);
+             infoWin.open(map, marker);
+                     })
+          return marker;
+   
+   
+
         });
 
         // Add a marker clusterer to manage the markers.
         var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
       }
-      var locations = [
-        {lat: 40.754070, lng: -122.122656},
-        {lat: 38.667286, lng: -121.371259},
-        {lat: 37.943117, lng: -77.491002},
-        {lat: 35.154725, lng: -77.183384},
-        {lat: 30.390648, lng: -92.696080},
-        {lat: 30.048891, lng: -95.684361},
-        {lat: 28.399860, lng: -97.310338},
-        {lat: 46.990560, lng: -103.968052}
 
+        var locations = [
+        {lat: 40.733117, lng: -74.779912, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 40.709178, lng: -74.809438, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 40.723117, lng: -74.909912, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 40.719178, lng: -74.859438, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+         {lat: 40.743117, lng: -74.779912, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 40.759178, lng: -74.809438, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 40.763117, lng: -74.909912, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 40.779178, lng: -74.859438, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, information.....etc.</p>'+ '</div>'+'</div>'},
+        {lat: 40.734117, lng: -74.779912, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...etc</p>'+ '</div>'+'</div>'},
+        {lat: 40.705178, lng: -74.809438, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 40.725117, lng: -74.909912, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 40.715178, lng: -74.859438, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 40.745117, lng: -74.779912, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 40.759578, lng: -74.809438, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 40.763517, lng: -74.909912, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 40.779578, lng: -74.859438, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 38.667286, lng: -121.371259, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 37.943117, lng: -77.491002, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 35.154725, lng: -77.183384, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 30.390648, lng: -92.696080, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 30.048891, lng: -95.684361, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 28.399860, lng: -97.310338, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'},
+        {lat: 46.990560, lng: -103.968052, info: '<div>' + '<div>'+'</div>'+ '<h1>Account Name</h1>'+'<div>'+'<p><b>Account Name</b>, has 3000 particpants and 17 programs...</p>'+ '</div>'+'</div>'}
       ]
+        
     </script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
@@ -76,5 +110,6 @@
     </script>
   </body>
 </html>
+
 
 
